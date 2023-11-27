@@ -1,0 +1,31 @@
+
+/*
+p {
+    background-color: dodgerblue;
+    color: salmon;
+    font-size: 10px;
+    border: 4px dotted maroon;
+}
+#paragraf{
+    background-color: rebeccapurple;
+}
+.text{
+    background-color: blue;
+}
+.text-description{
+    border: solid yellowgreen;
+}
+*/
+
+p{
+    background-color: red;
+}
+#paragraf{
+    background-color: blue;
+}
+.text-description{
+    background-color: green;
+}
+.first{
+    color: aquamarine;
+}
