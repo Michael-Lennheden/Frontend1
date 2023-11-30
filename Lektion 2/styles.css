@@ -1,0 +1,38 @@
+.long{
+    height: 2000px;
+    width: 10px;
+    background-color: dodgerblue;
+}
+
+.main {
+    height: 300px;
+    width: 300px;
+
+    background-color: grey;
+
+    display: flex;
+}
+.block-1{
+    height: 50px;
+    width: 50px;
+    background-color: salmon;
+}
+.block-2{
+    height: 50px;
+    width: 50px;
+    background-color: dodgerblue;
+}
+.block-3{
+    height: 50px;
+    width: 50px;
+    background-color: green;
+}
+h1{
+    font-family: "Comic Sans MS";
+    font-size: 2em;
+    background-color: red;
+    color: #fff;
+    border: 5px dashed black;
+    font-weight: bold;
+
+}
