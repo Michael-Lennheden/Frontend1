@@ -4,10 +4,15 @@ const btnStart = document.querySelector('.startBtn')
 const scoreParagraph = document.querySelector('.score')
 const roundParagraph = document.querySelector('.round')
 const progressBarValue = document.querySelector('.progressBar')
+
 let randomisedQuestions = undefined
 let currentQuestion = undefined
+
+let button = undefined
+
 let score = 0
 let round = 1
+
 scoreParagraph.innerText = 'Score: ' + score
 roundParagraph.innerText = 'Round: ' + round
 
@@ -49,9 +54,11 @@ function SetAnswers(question) {
     answerContainer.innerHTML = ''
 
     let answers = question.answers
+    const btn = 'btn'
     for (let j = 0; j < answers.length; j++) {
-        const button = document.createElement('button')
+        button = document.createElement('button')
         button.classList.add('answer')
+        button.id = btn+j
         button.innerText = answers[j].text
         button.setAttribute('data-correct', answers[j].correct)
         button.addEventListener('click', handleAnswerClick)
@@ -68,6 +75,7 @@ function handleAnswerClick(event) {
     } else {
         selectedAnswer.classList.add('incorrect')
     }
+    disableButtons()
     setTimeout(() => {
         currentQuestion++
         roundParagraph.innerText = 'Round: ' + ++round
@@ -85,6 +93,14 @@ function progressBar(){
             progressBarValue.style.width = width + '%';
         }
     }, 50);
+}
+
+function disableButtons(){
+    const btn = 'btn'
+    for (let i = 0; i < 4; i++){
+        let btnId = btn+i
+        document.querySelector('#'+btnId).disabled = true
+    }
 }
 
 const questions = [
