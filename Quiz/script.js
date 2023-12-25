@@ -4,14 +4,15 @@ const btnStart = document.querySelector('.startBtn')
 const scoreParagraph = document.querySelector('.score')
 const roundParagraph = document.querySelector('.round')
 const progressBarValue = document.querySelector('.progressBar')
+const nextBtn = document.querySelector('.continueBtn')
 
 let randomisedQuestions = undefined
 let currentQuestion = undefined
-
 let button = undefined
-
+let interval = undefined
 let score = 0
 let round = 1
+let isPaused = false
 
 scoreParagraph.innerText = 'Score: ' + score
 roundParagraph.innerText = 'Round: ' + round
@@ -40,9 +41,14 @@ function setQuestion() {
     if (currentQuestion >= 0 && currentQuestion < randomisedQuestions.length) {
         DisplayQuestion(randomisedQuestions[currentQuestion])
         SetAnswers(randomisedQuestions[currentQuestion])
+        clearInterval(interval)
+        isPaused = false
         progressBar()
     } else {
-        console.error('Invalid question index.')
+        alert('Slut på frågor')
+    }
+    if (nextBtn !== undefined){
+        nextBtn.hidden = true
     }
 }
 
@@ -72,25 +78,41 @@ function handleAnswerClick(event) {
     if (isCorrect) {
         selectedAnswer.classList.add('correct')
         scoreParagraph.innerText = 'Score: ' + ++score
-    } else {
+    } else
+    {
         selectedAnswer.classList.add('incorrect')
     }
     disableButtons()
-    setTimeout(() => {
-        currentQuestion++
-        roundParagraph.innerText = 'Round: ' + ++round
-        setQuestion()
-    }, 5000)
+    isPaused = true
+    continueButton()
 }
 
 function progressBar(){
     let width = 100;
-    let interval = setInterval(function() {
-        if (width <= 0) {
-            clearInterval(interval);
-        } else {
-            width--;
-            progressBarValue.style.width = width + '%';
+    interval = setInterval(function() {
+        if(!isPaused){
+            if (width <= 0) {
+                clearInterval(interval);
+            } else {
+                width--;
+                progressBarValue.style.width = width + '%';
+            }
+        }
+        if (width <= 0){
+            disableButtons()
+
+            const btn = 'btn'
+            let correctAnswer = undefined
+
+            for(let i = 0; i<4; i++){
+                let btnId = btn+i
+
+                if (document.querySelector('#'+btnId).dataset.correct === 'true'){
+                    correctAnswer = document.querySelector('#'+btnId)
+                    correctAnswer.classList.add('correct')
+                }
+            }
+            continueButton()
         }
     }, 50);
 }
@@ -101,6 +123,13 @@ function disableButtons(){
         let btnId = btn+i
         document.querySelector('#'+btnId).disabled = true
     }
+}
+
+function continueButton(){
+    nextBtn.addEventListener('click', setQuestion)
+    nextBtn.hidden = false
+    currentQuestion++
+    roundParagraph.innerText = 'Round: ' + ++round
 }
 
 const questions = [
