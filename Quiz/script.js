@@ -45,7 +45,7 @@ function setQuestion() {
         isPaused = false
         progressBar()
     } else {
-        alert('Slut på frågor')
+        alert('There is no more questions available.')
     }
     if (nextBtn !== undefined){
         nextBtn.hidden = true

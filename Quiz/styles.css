@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Comic Sans MS";
+    font-family: "Comic Sans MS", serif;
 }
 
 body{
@@ -85,10 +85,10 @@ display: flex;
 
 .continueBtn{
     padding: 5px;
-    box-shadow: 0 0 1px 1px;
+    box-shadow: 0 0 5px 1px;
     width: 90%;
     background-color: limegreen;
-    color: white;
+    color: black;
     border-radius: 25px;
 }
 
@@ -109,6 +109,7 @@ display: flex;
     column-gap: 10px;
     background-color: rgba(25,25,25,90%);
     border-radius: 25px;
+    box-shadow: 0 0 5px 1px;
 }
 .progressBar{
     width: 100%;
